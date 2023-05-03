@@ -1,7 +1,15 @@
+:: cmd
+echo "Building %PKG_NAME%."
+
 mkdir build
 cd build
+if errorlevel 1 exit /b 1
 
-cmake -G "NMake Makefiles" ^
+:: Generate the build files.
+echo "Generating the build files..."
+cmake .. %CMAKE_ARGS% ^
+      -G"Ninja" ^
+      -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
       -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DCMAKE_LIBRARY_PATH="%LIBRARY_LIB%" ^
@@ -20,15 +28,21 @@ cmake -G "NMake Makefiles" ^
       -DWITH_ZLIB=ON ^
       -DWITH_ZSTD=ON ^
       -DZSTD_LIBRARY="%LIBRARY_LIB%\libzstd.lib" ^
+      -DWITH_LZMA=ON ^
+      -DLIBLZMA_LIBRARY:FILEPATH="%LIBRARY_LIB%\liblzma.lib" ^
       -DWITH_LAZPERF=ON ^
       %SRC_DIR%
-if errorlevel 1 exit 1
+if errorlevel 1 exit /b 1
 
-nmake
-if errorlevel 1 exit 1
+:: Build.
+echo "Building..."
+ninja -j%CPU_COUNT%
+if errorlevel 1 exit /b 1
 
-nmake install
-if errorlevel 1 exit 1
+:: Install.
+echo "Installing..."
+ninja install
+if errorlevel 1 exit /b 1
 
 set ACTIVATE_DIR=%PREFIX%\etc\conda\activate.d
 set DEACTIVATE_DIR=%PREFIX%\etc\conda\deactivate.d
@@ -48,3 +62,6 @@ if errorlevel 1 exit 1
 copy %RECIPE_DIR%\scripts\deactivate.sh %DEACTIVATE_DIR%\pdal-deactivate.sh
 if errorlevel 1 exit 1
 
+:: Error free exit.
+echo "Error free exit!"
+exit 0

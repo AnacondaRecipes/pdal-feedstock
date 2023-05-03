@@ -2,6 +2,8 @@
 
 set -ex
 
+echo "Building ${PKG_NAME}."
+
 # strip std settings from conda
 CXXFLAGS="${CXXFLAGS/-std=c++14/}"
 CXXFLAGS="${CXXFLAGS/-std=c++11/}"
@@ -36,8 +38,12 @@ else
 fi
 
 
-rm -rf build && mkdir build &&  cd build
-cmake ${CMAKE_ARGS} \
+rm -rf build && mkdir build && cd build || exit 1
+
+# Generate the build files.
+echo "Generating the build files..."
+cmake .. ${CMAKE_ARGS} \
+  -GNinja \
   -DBUILD_SHARED_LIBS=ON \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=$PREFIX \
@@ -60,8 +66,15 @@ cmake ${CMAKE_ARGS} \
   -DWITH_LAZPERF=ON \
   ..
 
-make -j $CPU_COUNT ${VERBOSE_CM}
-make install
+# Build.
+echo "Building..."
+ninja -j${CPU_COUNT} || exit 1
+
+
+# Installing
+echo "Installing..."
+ninja install || exit 1
+
 
 # This will not be needed once we fix upstream.
 chmod 755 $PREFIX/bin/pdal-config
@@ -73,3 +86,7 @@ mkdir -p $DEACTIVATE_DIR
 
 cp $RECIPE_DIR/scripts/activate.sh $ACTIVATE_DIR/pdal-activate.sh
 cp $RECIPE_DIR/scripts/deactivate.sh $DEACTIVATE_DIR/pdal-deactivate.sh
+
+# Error free exit!
+echo "Error free exit!"
+exit 0

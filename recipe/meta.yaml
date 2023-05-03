@@ -21,45 +21,54 @@ requirements:
     - {{ compiler('c') }}
     - cmake
     - make        # [not win]
+    - ninja       # [win]
     - pkg-config
     - libcxx =14  # [osx]
 
   host:
     - blas  # [win]
     - mkl  # [win]
-    - ceres-solver
+    - ceres-solver 2.1.0
     - curl
     - draco
-    - eigen
-    - geotiff
-    - hdf5
-    - libgdal
-    - libkml
-    - libpq
-    - libxml2
+    - eigen 3.3.7
+    - geotiff 1.7.0
+    - hdf5 1.10.6              # [not (osx and arm64)]
+    - hdf5 1.12.1              # [osx and arm64]
+    - libgdal 3.0.2
+    - libkml 1.3.0
+    - libpq 12.9
+    - libxml2 2.10.3
     - nitro
-    - openssl
-    - tiledb
-    - zlib
-    - zstd
+    - numpy {{ numpy }}
+    - openssl 1.1.1
+    - sqlite
+    - tiledb 2.3.3
+    - xz
+    - zlib 1.2.13
+    - zstd 1.5.2
   run:
     - blas  # [win]
     - mkl   # [win]
-    - ceres-solver
+    - ceres-solverr >=2.1.0,<2.2.0a0
     - curl
     - draco
-    - eigen
-    - geotiff
-    - hdf5
-    - libgdal
-    - libkml
-    - libpq
-    - libxml2
+    - eigen >=3.3.7,<3.3.8.0a0
+    - geotiff >=1.7.0,<1.8.0a0
+    - hdf5 >=1.10.6,<1.10.7.0a0  # [not (osx and arm64)]
+    - hdf5 >=1.12.1,<1.12.2.0a0  # [osx and arm64]
+    - libgdal >=3.0.2,<3.1.0a0
+    - libkml >=1.3.0,<1.4.0a0
+    - libpq >=12.9,<13.0a0
+    - libxml2>=2.10.3,<2.11.0a0
     - nitro
-    - openssl
-    - tiledb
-    - zlib
-    - zstd
+    - {{ pin_compatible('numpy') }}
+    - openssl >=1.1.1t,<1.1.2a
+    - sqlite
+    - tiledb >=2.3.3,<2.4.0a0
+    - xz
+    - zlib >=1.2.13,<1.3.0a0
+    - zstd >=1.5.2,<1.6.0a0
   run_constrained:   # [osx and x86_64]
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx and x86_64]
 
