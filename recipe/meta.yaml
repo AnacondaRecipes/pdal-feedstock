@@ -18,7 +18,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
-    - make
+    - make  # [not win]
     - pkg-config
     - libcxx =14  # [osx]
 
@@ -57,7 +57,7 @@ requirements:
     - draco
     - openssl
     - ceres-solver
-    - mkl  # [win]
+    - mkl   # [win]
     - blas  # [win]
 
   run_constrained:   # [osx and x86_64]
