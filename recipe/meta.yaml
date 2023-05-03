@@ -10,6 +10,8 @@ source:
 
 build:
   number: 0
+  # geotiff, libgdal=3.0, ceres-solver (and its dependencies suitesparse, gflags, glog, eigen) are not available on s390x
+  skip: true  # [s390x]
   run_exports:
     - {{ pin_subpackage('pdal', max_pin='x.x') }}
 
@@ -18,48 +20,46 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
-    - make  # [not win]
+    - make        # [not win]
     - pkg-config
     - libcxx =14  # [osx]
 
   host:
-    - libgdal
-    - geotiff
-    - libpq
-    - libkml
-    - eigen
-    - nitro
-    - curl
-    - zlib
-    - hdf5
-    - tiledb
-    - zstd
-    - libxml2
-    - draco
-    - openssl
-    - ceres-solver
+    - blas  # [win]
     - mkl  # [win]
-    - blas  # [win]
-
-  run:
-    - libgdal
-    - geotiff
-    - libpq
-    - libkml
-    - eigen
-    - nitro
-    - curl
-    - zlib
-    - hdf5
-    - tiledb
-    - zstd
-    - libxml2
-    - draco
-    - openssl
     - ceres-solver
-    - mkl   # [win]
+    - curl
+    - draco
+    - eigen
+    - geotiff
+    - hdf5
+    - libgdal
+    - libkml
+    - libpq
+    - libxml2
+    - nitro
+    - openssl
+    - tiledb
+    - zlib
+    - zstd
+  run:
     - blas  # [win]
-
+    - mkl   # [win]
+    - ceres-solver
+    - curl
+    - draco
+    - eigen
+    - geotiff
+    - hdf5
+    - libgdal
+    - libkml
+    - libpq
+    - libxml2
+    - nitro
+    - openssl
+    - tiledb
+    - zlib
+    - zstd
   run_constrained:   # [osx and x86_64]
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx and x86_64]
 
@@ -69,8 +69,9 @@ test:
     - pdal --drivers --debug
 
 about:
-  home: https://www.pdal.io
+  home: https://pdal.io
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE.txt
   summary: Point Data Abstraction Library (PDAL)
   description: Point cloud data processing.

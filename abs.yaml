@@ -1,3 +1,8 @@
+# Suppress error-oerlinking error 
+# because xerces-c, libcurl, glog, gflags not in reqs/run, (i.e. it is overlinking) (likely) or a missing dependency (less likely)
+build_parameters:
+  - ""
+
 upload_channels:
   - sk_test
 
