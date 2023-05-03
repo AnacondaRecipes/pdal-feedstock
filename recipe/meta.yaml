@@ -34,16 +34,16 @@ requirements:
     - geotiff 1.7.0
     - hdf5 1.10.6              # [not (osx and arm64)]
     - hdf5 1.12.1              # [osx and arm64]
-    - libgdal 3.0.2
+    - libgdal 3.6.2
     - libkml 1.3.0
     - libpq 12.9
-    - libxml2
+    - libxml2 2.10
     - nitro
     - numpy {{ numpy }}
     - openssl 1.1.1
-    - sqlite
+    - sqlite 3.41.2
     - tiledb 2.3.3
-    - xz
+    - xz 5.4
     - zlib 1.2.13
     - zstd 1.5.2
   run:
@@ -59,13 +59,13 @@ requirements:
     - libgdal >=3.0.2,<3.1.0a0
     - libkml >=1.3.0,<1.4.0a0
     - libpq >=12.9,<13.0a0
-    - libxml2
+    - libxml2 >=2.10.3,<2.11.0a0
     - nitro
     - {{ pin_compatible('numpy') }}
     - openssl >=1.1.1t,<1.1.2a
-    - sqlite
+    - sqlite >=3.41.2,<4.0a0
     - tiledb >=2.3.3,<2.4.0a0
-    - xz
+    - xz >=5.4.2,<6.0a0
     - zlib >=1.2.13,<1.3.0a0
     - zstd >=1.5.2,<1.6.0a0
   run_constrained:   # [osx and x86_64]
