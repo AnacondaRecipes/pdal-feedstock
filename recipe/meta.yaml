@@ -20,8 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
-    - make        # [not win]
-    - ninja       # [win]
+    - ninja
     - pkg-config
     - libcxx =14  # [osx]
 
