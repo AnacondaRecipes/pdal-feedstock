@@ -25,7 +25,7 @@ requirements:
     - ninja
     - pkg-config
     - libcxx =14  # [osx]
-
+    - m2-patch  # [win]
   host:
     - blas  # [win]
     - mkl-devel {{ mkl }}.*           # [blas_impl == "mkl"]
