@@ -9,9 +9,14 @@ CXXFLAGS="${CXXFLAGS/-std=c++14/}"
 CXXFLAGS="${CXXFLAGS/-std=c++11/}"
 export CXXFLAGS
 
-if [ "$(uname)" == "Linux" ]; then
-  export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
+if [[ ${target_platform} =~ .*linux*. ]]; then
+  RPATH="-Wl,-rpath-link,${PREFIX}/lib"
+elif [[ ${target_platform} == osx-64 ]]; then
+  RPATH="-Wl,-rpath,${PREFIX}/lib"
+fi
+export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib ${RPATH}"
 
+if [ "$(uname)" == "Linux" ]; then
   # need this for draco finding
   export PKG_CONFIG_PATH="$PKG_CONFIG_PATH;${PREFIX}/lib64/pkgconfig"
 fi
