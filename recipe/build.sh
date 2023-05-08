@@ -4,6 +4,8 @@ set -ex
 
 echo "Building ${PKG_NAME}."
 
+cd ${SRC_DIR}
+
 # strip std settings from conda
 CXXFLAGS="${CXXFLAGS/-std=c++14/}"
 CXXFLAGS="${CXXFLAGS/-std=c++11/}"
