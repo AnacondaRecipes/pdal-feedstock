@@ -71,6 +71,7 @@ cmake .. ${CMAKE_ARGS} \
   -DWITH_ZSTD=ON \
   -DWITH_LASZIP=ON \
   -DWITH_LAZPERF=ON \
+  -DWITH_LZMA=ON \
   ..
 
 # Build.

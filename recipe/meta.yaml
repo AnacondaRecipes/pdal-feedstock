@@ -9,7 +9,7 @@ source:
   sha256: 1d193e9cf11766a394722e1899d6a7d1fb81387af113250beff58e6325851b13
 
 build:
-  number: 0
+  number: 1
   # geotiff, libgdal=3.0, ceres-solver (and its dependencies suitesparse, gflags, glog, eigen) are not available on s390x
   skip: true  # [s390x]
   run_exports:
@@ -37,11 +37,10 @@ requirements:
     - libcurl 7.88.1
     - draco 1.5.6
     - geotiff 1.7.0
-    - hdf5 1.10.6              # [not (osx and arm64)]
-    - hdf5 1.12.1              # [osx and arm64]
+    - hdf5 1.12.1
     - libgdal 3.6.2
     - libkml 1.3.0
-    - libpq 12.9
+    - libpq 12.15
     - nitro 2.7.dev6
     - tiledb 2.3.3  # DBUILD_PLUGIN_TILEDB enabled on unix
     - xz 5.4
@@ -50,7 +49,7 @@ requirements:
     # optional packages: also glog and gflags from ceres-solver
     - eigen 3.3.7
     - libxml2 2.10
-    - openssl 1.1.1
+    - openssl {{ openssl }}
     - zstd 1.5.2
   run:
     - blas  # [win]
@@ -61,14 +60,13 @@ requirements:
     - draco >=1.5.6,<1.6.0a0
     - eigen >=3.3.7,<3.3.8.0a0
     - geotiff >=1.7.0,<1.8.0a0
-    - hdf5 >=1.10.6,<1.10.7.0a0  # [not (osx and arm64)]
-    - hdf5 >=1.12.1,<1.12.2.0a0  # [osx and arm64]
+    - hdf5 >=1.12.1,<1.12.2.0a0
     - libgdal >=3.6.2,<3.7.0a0
     - libkml >=1.3.0,<1.4.0a0
-    - libpq >=12.9,<13.0a0
+    - libpq >=12.15,<13.0a0
     - libxml2 >=2.10.3,<2.11.0a0
     - nitro >=2.7.dev6,<2.8.0a0
-    - openssl >=1.1.1t,<1.1.2a
+    - openssl  # exact pin handled through openssl run_exports
     - tiledb >=2.3.3,<2.4.0a0
     - xz >=5.4.2,<6.0a0
     - zlib >=1.2.13,<1.3.0a0
