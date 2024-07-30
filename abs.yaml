@@ -2,3 +2,4 @@ upload_channels:
   - sfe1ed40
 channels:
   - sfe1ed40
+aggregate_branch: libxml_2.13.1
