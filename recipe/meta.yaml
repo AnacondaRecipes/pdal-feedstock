@@ -9,7 +9,7 @@ source:
   sha256: 1d193e9cf11766a394722e1899d6a7d1fb81387af113250beff58e6325851b13
 
 build:
-  number: 0
+  number: 1
   # geotiff, libgdal=3.0, ceres-solver (and its dependencies suitesparse, gflags, glog, eigen) are not available on s390x
   skip: true  # [s390x]
   run_exports:
@@ -49,7 +49,7 @@ requirements:
     - xerces-c 3.2.4
     # optional packages: also glog and gflags from ceres-solver
     - eigen 3.3.7
-    - libxml2 2.10
+    - libxml2 {{ libxml2 }}
     - openssl 1.1.1
     - zstd 1.5.2
   run:
