@@ -4,4 +4,7 @@ upload_channels:
 channels:
   - sfe1ed40
   - https://staging.continuum.io/prefect/fs/gdal-feedstock/pr25/a104745
+  - https://staging.continuum.io/prefect/fs/libspatialite-feedstock/pr11/2acebfd
+  - https://staging.continuum.io/prefect/fs/fontconfig-feedstock/pr11/3322e36
+  - https://staging.continuum.io/prefect/fs/gettext-feedstock/pr6/c7aa8c4
   - https://staging.continuum.io/prefect/fs/libxml2-feedstock/pr17/1c2e862
