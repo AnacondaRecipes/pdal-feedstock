@@ -56,7 +56,7 @@ requirements:
     - mkl {{ mkl }}.*                 # [blas_impl == "mkl"]
     - {{ pin_compatible('intel-openmp') }}   # [blas_impl == "mkl"]
     - ceres-solver >=2.1.0,<2.2.0a0
-    - libcurl >=7.88.1,<8.0.0a0
+    - libcurl >=8.1.1,<9.0.0a0
     - draco >=1.5.6,<1.6.0a0
     - eigen >=3.3.7,<3.3.8.0a0
     - geotiff >=1.7.0,<1.8.0a0
