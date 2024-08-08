@@ -1,0 +1,58 @@
+From a13d70254ef1c0788f584aeb5ec25392fe9f8497 Mon Sep 17 00:00:00 2001
+From: Steven <scrass@anaconda.com>
+Date: Thu, 8 Aug 2024 10:22:57 -0600
+Subject: [PATCH] update XMLSchema.cpp
+
+---
+ pdal/XMLSchema.cpp | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/pdal/XMLSchema.cpp b/pdal/XMLSchema.cpp
+index 81d62a6..9019a06 100644
+--- a/pdal/XMLSchema.cpp
++++ b/pdal/XMLSchema.cpp
+@@ -73,7 +73,11 @@ namespace pdal
+ {
+ 
+ void SchemaStructuredErrorHandler
++#if LIBXML_VERSION >= 21200
++(void * /*userData*/, const xmlError *error)
++#else
+ (void * /*userData*/, xmlErrorPtr error)
++#endif
+ {
+     std::ostringstream oss;
+ 
+@@ -98,14 +102,22 @@ void SchemaStructuredErrorHandler
+ }
+ 
+ void SchemaParserStructuredErrorHandler
++#if LIBXML_VERSION >= 21200
++(void * /*userData*/, const xmlError *error)
++#else
+ (void * /*userData*/, xmlErrorPtr error)
++#endif
+ {
+     std::cerr << "Schema parsing error: '" << error->message << "' " <<
+         "on line " << error->line << std::endl;
+ }
+ 
+ void SchemaValidationStructuredErrorHandler
++#if LIBXML_VERSION >= 21200
++(void * /*userData*/, const xmlError *error)
++#else
+ (void * /*userData*/, xmlErrorPtr error)
++#endif
+ {
+     std::cerr << "Schema validation error: '" << error->message << "' " <<
+         "on line " << error->line << std::endl;
+@@ -646,4 +658,4 @@ void XMLSchema::writeXml(xmlTextWriterPtr w) const
+     xmlTextWriterFlush(w);
+ }
+ 
+-} // namespace pdal
++} // namespace pdal
+\ No newline at end of file
+-- 
+2.39.3 (Apple Git-145)
+
