@@ -12,7 +12,7 @@ source:
     - patches/0001_Fix_xmlErrorPtr.patch
 
 build:
-  number: 2
+  number: 3
   # geotiff, libgdal=3.0, ceres-solver (and its dependencies suitesparse, gflags, glog, eigen) are not available on s390x
   skip: true  # [s390x]
   run_exports:
@@ -45,7 +45,7 @@ requirements:
     - hdf5 1.12.1
     - libgdal 3.6.2
     - libkml 1.3.0
-    - libpq 12.15
+    - libpq 17.0
     - nitro 2.7.dev6
     - tiledb 2.3.3  # DBUILD_PLUGIN_TILEDB enabled on unix
     - xz 5.4
@@ -68,7 +68,7 @@ requirements:
     - hdf5  # exact pin handled through hdf5 run_exports
     - libgdal >=3.6.2,<3.7.0a0
     - libkml >=1.3.0,<1.4.0a0
-    - libpq >=12.15,<13.0a0
+    - libpq  # exact pin handled through libpq run_exports
     - libxml2
     - nitro >=2.7.dev6,<2.8.0a0
     - openssl  # exact pin handled through openssl run_exports
