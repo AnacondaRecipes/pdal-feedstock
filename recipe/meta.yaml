@@ -12,7 +12,7 @@ source:
     - patches/0001_Fix_xmlErrorPtr.patch
 
 build:
-  number: 3
+  number: 4
   # geotiff, libgdal=3.0, ceres-solver (and its dependencies suitesparse, gflags, glog, eigen) are not available on s390x
   skip: true  # [s390x]
   run_exports:
@@ -23,14 +23,13 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
     - ninja
     - pkg-config
     - libcxx =14  # [osx]
-    - patch  # [unix]
-    - m2-patch  # [win]
   host:
     - blas  # [win]
     - mkl-devel {{ mkl }}.*           # [blas_impl == "mkl"]
